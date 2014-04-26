@@ -21,6 +21,28 @@ class Select2TypeTest extends TextTypeTest
         ), $configs);
     }
 
+    public function testAjaxMultipleWithoutViewTransformer()
+    {
+        $form = $this->factory->create(
+            'thrace_select2_ajax',
+            null,
+            array(
+                'multiple'               => true,
+                'configs'                => array('ajax' => array(),'apply_view_transformer' => false)
+            )
+        );
+        $view = $form->createView();
+        $configs = $view->vars['configs'];
+        $this->assertSame(array(
+                'width' => '300px',
+                'allowClear' => true,
+                'ajax' => array (),
+                'apply_view_transformer' => false,
+                'placeholder' => 'select.empty_value',
+                'multiple' => true,
+            ), $configs);
+    }
+
     public function testAjaxAndMultiple()
     {
         $form = $this->factory->create(Select2Type::class, null, array(

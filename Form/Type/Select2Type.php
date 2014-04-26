@@ -56,7 +56,7 @@ class Select2Type extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if($this->widget === 'ajax' && $options['multiple'] === true) {
+        if ($options['apply_view_transformer'] && $this->widget === 'ajax' && $options['multiple'] === true) {
             $builder->addViewTransformer($this->transformer);
         }
     }
@@ -92,11 +92,12 @@ class Select2Type extends AbstractType
         );
 
         $defaults = array(
-            'multiple'           => false,
-            'expanded'           => false,
-            'empty_value'        => 'select.empty_value',
-            'translation_domain' => 'ThraceFormBundle',
-            'configs'            => $defaultConfigs,
+            'apply_view_transformer' => true,
+            'multiple'               => false,
+            'expanded'               => false,
+            'empty_value'            => 'select.empty_value',
+            'translation_domain'     => 'ThraceFormBundle',
+            'configs'                => $defaultConfigs,
         );
 
         if($this->widget !== 'ajax') {
