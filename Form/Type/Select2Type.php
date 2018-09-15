@@ -100,27 +100,26 @@ class Select2Type extends AbstractType
             'configs'                => $defaultConfigs,
         );
 
-        if($this->widget !== 'ajax') {
-            $resolver->setNormalizer(
-                'expanded', function (Options $options, $value) {
+        $normalizers = array(
+            'expanded' => function (Options $options, $value) {
                 return false;
-            });
+            },
+            'configs' => function (Options $options, $value) use ($defaultConfigs) {
+                $configs = array_replace_recursive($defaultConfigs, $value);
 
-
-            $resolver->setNormalizer(
-                'configs', function (Options $options, $value) use ($defaultConfigs) {
-                $configs                = array_replace_recursive($defaultConfigs, $value);
                 $configs['placeholder'] = $options->get('empty_value');
-                if(true === $options->get('multiple') && isset($configs['ajax'])) {
+                if(true === $options->get('multiple') && isset($configs['ajax'])){
                     $configs['multiple'] = true;
                 }
 
                 return $configs;
-            });
-        }
-
+            }
+        );
 
         $resolver->setDefaults($defaults);
+        foreach ($normalizers as $option => $normalizer) {
+            $resolver->setNormalizer($option, $normalizer);
+        }
 
     }
 
