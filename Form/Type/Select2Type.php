@@ -106,8 +106,8 @@ class Select2Type extends AbstractType
             },
             'configs' => function (Options $options, $value) use ($defaultConfigs) {
                 $configs = array_replace_recursive($defaultConfigs, $value);
-                $configs['placeholder'] = $options->get('empty_value');
-                if(true === $options->get('multiple') && isset($configs['ajax'])){
+                $configs['placeholder'] = $options->offsetGet('empty_value');
+                if(true === $options->offsetGet('multiple') && isset($configs['ajax'])){
                     $configs['multiple'] = true;
                 }
 
