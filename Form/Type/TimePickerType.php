@@ -100,36 +100,40 @@ class TimePickerType extends AbstractType
             'parts' => array('hour', 'minute'),
             'configs' => $defaultConfigs
         ));
-    
-        $resolver->setNormalizers(array(
-            'time_format' => function (Options $options, $value) {
-                if ($options->has('with_seconds') && $options->get('with_seconds') === true){
-                    return ($options->get('use_meridiem') === true) ? 'h:i:s a' : 'H:i:s';
+
+        $resolver->setNormalizer(
+            'time_format', function (Options $options, $value) {
+                if ($options->offsetExists('with_seconds') && $options->offsetGet('with_seconds') === true){
+                    return ($options->offsetGet('use_meridiem') === true) ? 'h:i:s a' : 'H:i:s';
                 } else {
-                    return ($options->get('use_meridiem') === true) ? 'h:i a' : 'H:i';
-                } 
-            },
-            'parts' => function (Options $options, $value){
-                if ($options->has('with_seconds') && $options->get('with_seconds') === true){
+                    return ($options->offsetGet('use_meridiem') === true) ? 'h:i a' : 'H:i';
+                }
+            }
+        );
+
+        $resolver->setNormalizer(
+            'parts', function (Options $options, $value) {
+                if ($options->offsetExists('with_seconds') && $options->offsetGet('with_seconds') === true){
                     return  array('hour', 'minute', 'second');
                 } else {
                     return array('hour', 'minute');
                 }
-            },
-            'configs' => function (Options $options, $value) use ($defaultConfigs) {
-                $configs = array_replace_recursive($defaultConfigs, $value);
+            }
+        );
 
-                if (!$options->has('with_seconds') || $options->get('with_seconds') === false){
-                    $configs['timeFormat'] =  ($options->get('use_meridiem') === true) ? 'hh:mm tt' : 'HH:mm';
+        $resolver->setNormalizer(
+            'configs', function (Options $options, $value) use ($defaultConfigs) {
+                $configs = array_replace_recursive($defaultConfigs, $value);
+                if (!$options->offsetExists('with_seconds') || $options->offsetGet('with_seconds') === false){
+                    $configs['timeFormat'] =  ($options->offsetGet('use_meridiem') === true) ? 'hh:mm tt' : 'HH:mm';
                     $configs['showSecond'] = false;
                 } else {
-                    $configs['timeFormat'] =  ($options->get('use_meridiem') === true) ? 'hh:mm:ss tt' : 'HH:mm:ss';
+                    $configs['timeFormat'] =  ($options->offsetGet('use_meridiem') === true) ? 'hh:mm:ss tt' : 'HH:mm:ss';
                     $configs['showSecond'] = true;
                 }
-
                 return $configs;
             }
-        ));
+        );
     
         $resolver->setAllowedValues(array(
             'input' => array(

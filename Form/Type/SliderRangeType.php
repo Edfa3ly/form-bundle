@@ -79,8 +79,8 @@ class SliderRangeType extends AbstractType
                 unset($value['width']);
             }
 
-            $value['first_name']  = $options->get('first_name');
-            $value['second_name'] = $options->get('second_name');
+            $value['first_name']  = $options->offsetGet('first_name');
+            $value['second_name'] = $options->offsetGet('second_name');
             $value['range']       = true;
 
             return $value;

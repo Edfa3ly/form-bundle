@@ -50,13 +50,6 @@ class ToggleButtonType extends AbstractType
                 'configs'            => $defaultConfigs,
             ));
 
-        $resolver->setNormalizers(
-            array(
-                'configs' => function (Options $options, $value) use ($defaultConfigs) {
-                    return array_replace_recursive($defaultConfigs, $value);
-                },
-            ));
-
         $resolver->setNormalizer(
             'configs', function (Options $options, $value) use ($defaultConfigs) {
             return array_replace_recursive($defaultConfigs, $value);

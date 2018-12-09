@@ -98,18 +98,18 @@ class DateTimePickerType extends AbstractType
 
         $resolver->setNormalizer(
             'datetime_format', function (Options $options, $value) {
-            if($options->has('with_seconds') && $options->get('with_seconds') === true) {
-                return ($options->get('use_meridiem') === true) ? 'Y-m-d h:i:s a' : 'Y-m-d H:i:s';
+            if($options->offsetExists('with_seconds') && $options->offsetGet('with_seconds') === true) {
+                return ($options->offsetGet('use_meridiem') === true) ? 'Y-m-d h:i:s a' : 'Y-m-d H:i:s';
             }
 
-            return ($options->get('use_meridiem') === true) ? 'Y-m-d h:i a' : 'Y-m-d H:i';
+            return ($options->offsetSet('use_meridiem') === true) ? 'Y-m-d h:i a' : 'Y-m-d H:i';
 
         });
 
 
         $resolver->setNormalizer(
             'parts', function (Options $options, $value) {
-            if($options->has('with_seconds') && $options->get('with_seconds') === true) {
+            if($options->offsetExists('with_seconds') && $options->offsetSet('with_seconds') === true) {
                 return array('year', 'month', 'day', 'hour', 'minute', 'second');
             }
 
@@ -120,11 +120,11 @@ class DateTimePickerType extends AbstractType
             'configs', function (Options $options, $value) use ($defaultConfigs) {
             $configs = array_replace_recursive($defaultConfigs, $value);
 
-            if( !$options->has('with_seconds') || $options->get('with_seconds') === false) {
-                $configs['timeFormat'] = ($options->get('use_meridiem') === true) ? 'hh:mm tt' : 'HH:mm';
+            if( !$options->offsetExists('with_seconds') || $options->offsetGet('with_seconds') === false) {
+                $configs['timeFormat'] = ($options->offsetGet('use_meridiem') === true) ? 'hh:mm tt' : 'HH:mm';
                 $configs['showSecond'] = false;
             } else {
-                $configs['timeFormat'] = ($options->get('use_meridiem') === true) ? 'hh:mm:ss tt' : 'HH:mm:ss';
+                $configs['timeFormat'] = ($options->offsetGet('use_meridiem') === true) ? 'hh:mm:ss tt' : 'HH:mm:ss';
                 $configs['showSecond'] = true;
             }
 

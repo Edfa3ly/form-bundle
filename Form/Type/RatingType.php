@@ -51,18 +51,16 @@ class RatingType extends AbstractType
             'translation_domain' => 'ThraceFormBundle',
             'configs' => $defaultConfigs,
         ));
-    
-        $resolver->setNormalizers(array(
-            'configs' => function (Options $options, $value) use ($defaultConfigs){
+
+        $resolver->setNormalizer(
+            'configs', function (Options $options, $value) use ($defaultConfigs){
                 $configs = array_replace_recursive($defaultConfigs, $value);
-                
                 if (!isset($configs['path'])){
                     throw new \InvalidArgumentException('Options "configs:path" is not set');
                 }
-                
                 return $configs;
             }
-        ));
+        );
     }
 
     

@@ -53,14 +53,15 @@ class InputLimiterType extends AbstractType
             'configs' => $defaultConfigs,
             'translation_domain' => 'ThraceFormBundle'
         ));
-    
-        $resolver->setNormalizers(array(
-            'configs' => function (Options $options, $value) use ($defaultConfigs){
+
+        $resolver->setNormalizer(
+            'configs', function (Options $options, $value) use ($defaultConfigs) {
                 $configs = array_replace_recursive($defaultConfigs, $value);
                 $configs['type'] = 'textarea';
+
                 return $configs;
             }
-        ));
+        );
     }
     
     /**

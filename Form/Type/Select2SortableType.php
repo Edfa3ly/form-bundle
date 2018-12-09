@@ -84,14 +84,14 @@ class Select2SortableType extends AbstractType
             'by_reference' => false,
             'configs' => $defaultConfigs,
         ));
-        
-        $resolver->setNormalizers(array(
-            'configs' => function (Options $options, $value) use ($defaultConfigs){
+
+        $resolver->setNormalizer(
+            'configs', function (Options $options, $value) use ($defaultConfigs){
                 $configs = array_replace_recursive($defaultConfigs, $value);
+
                 return $configs;
             }
-        ));
-          
+        );
         $resolver->setRequired(array('reference_class', 'inversed_class', 'inversed_property'));
     }
 

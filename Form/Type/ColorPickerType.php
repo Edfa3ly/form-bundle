@@ -51,13 +51,13 @@ class ColorPickerType extends AbstractType
             'translation_domain' => 'ThraceFormBundle',
             'configs' => $defaultConfigs,
         ));
-    
-        $resolver->setNormalizers(array(
-            'configs' => function (Options $options, $value) use ($defaultConfigs){
+
+        $resolver->setNormalizer(
+            'configs', function (Options $options, $value) use ($defaultConfigs){
                 $configs = array_replace_recursive($defaultConfigs, $value);
                 return $configs;
             }
-        ));
+        );
     }
    
     

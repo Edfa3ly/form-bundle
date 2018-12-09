@@ -49,14 +49,12 @@ class SpinnerType extends AbstractType
                 'configs'            => $defaultConfigs,
             ));
 
-        $resolver->setNormalizers(
-            array(
-                'configs' => function (Options $options, $value) use ($defaultConfigs) {
+        $resolver->setNormalizer(
+            'configs', function (Options $options, $value) use ($defaultConfigs) {
                     $configs = array_replace_recursive($defaultConfigs, $value);
-
                     return $configs;
-                },
-            ));
+            }
+        );
     }
 
     /**

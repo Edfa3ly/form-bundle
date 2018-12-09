@@ -76,24 +76,24 @@ class Select2DependentType extends AbstractType
 
         $resolver->setNormalizer(
             'first_options', function (Options $options, $value) {
-            $value['choices'] = $options->get('choices');
+            $value['choices'] = $options->offsetGet('choices');
 
             return $value;
         });
         $resolver->setNormalizer(
             'second_options', function (Options $options, $value) use ($choiceList) {
             $value['choices'] = array();
-            $value['multiple']    = $options->get('multiple');
+            $value['multiple']    = $options->offsetGet('multiple');
 
             return $value;
         });
 
         $resolver->setNormalizer(
             'configs', function (Options $options, $value) {
-            $value['first_name']       = $options->get('first_name');
-            $value['second_name']      = $options->get('second_name');
-            $value['dependent_source'] = $options->get('dependent_source');
-            $value['multiple']         = $options->get('multiple');
+            $value['first_name']       = $options->offsetGet('first_name');
+            $value['second_name']      = $options->offsetGet('second_name');
+            $value['dependent_source'] = $options->offsetGet('dependent_source');
+            $value['multiple']         = $options->offsetGet('multiple');
 
             return $value;
         });
