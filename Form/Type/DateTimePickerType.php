@@ -102,14 +102,14 @@ class DateTimePickerType extends AbstractType
                 return ($options->offsetGet('use_meridiem') === true) ? 'Y-m-d h:i:s a' : 'Y-m-d H:i:s';
             }
 
-            return ($options->offsetSet('use_meridiem') === true) ? 'Y-m-d h:i a' : 'Y-m-d H:i';
+            return ($options->offsetGet('use_meridiem') === true) ? 'Y-m-d h:i a' : 'Y-m-d H:i';
 
         });
 
 
         $resolver->setNormalizer(
             'parts', function (Options $options, $value) {
-            if($options->offsetExists('with_seconds') && $options->offsetSet('with_seconds') === true) {
+            if($options->offsetExists('with_seconds') && $options->offsetGet('with_seconds') === true) {
                 return array('year', 'month', 'day', 'hour', 'minute', 'second');
             }
 
