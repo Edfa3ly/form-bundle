@@ -9,7 +9,7 @@
 */
 namespace Thrace\FormBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -75,7 +75,7 @@ class ThraceFormExtension extends Extension
     private function loadExtendedTypes($serviceId, $name, ContainerBuilder $container)
     {
         foreach (array('choice', 'language', 'country', 'timezone', 'locale', 'entity', 'ajax') as $type) {
-            $typeDef = new DefinitionDecorator($serviceId);
+            $typeDef = new ChildDefinition($serviceId);
             $typeDef
                 ->addArgument($type)
                 ->addTag('form.type', array('alias' => $name. '_' . $type))
