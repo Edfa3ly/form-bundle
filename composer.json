@@ -15,6 +15,12 @@
             "dev-master": "1.0.*-dev"
         }
     },
+    "repositories": {
+        "Thrace\\ComponentBundle": {
+            "type": "vcs",
+            "url": "https://github.com/Edfa3ly/component-bundle"
+        }
+    },
     "minimum-stability": "stable",
     "require": {
 	    "php": ">=5.3.3",
@@ -26,7 +32,8 @@
         "phpunit/phpunit": "^4.8|~5.7",
         "symfony/doctrine-bridge": "~2.7|~3.0",
         "doctrine/orm": "2.*,>=2.4.5",
-        "doctrine/doctrine-bundle": "1.*"
+        "doctrine/doctrine-bundle": "1.*",
+        "thrace/component-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Thrace\\FormBundle": "" }
