@@ -10,7 +10,7 @@ class AutocompleteTypeTest extends TextTypeTest
 
     public function testInvalidConfigs()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $form = $this->factory->create(AutocompleteType::class);
 
     }

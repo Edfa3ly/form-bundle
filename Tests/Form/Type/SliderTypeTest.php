@@ -44,7 +44,7 @@ class SliderTypeTest extends TextTypeTest
     
     public function testWithInvalidConfigs()
     {
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $form = $this->factory->create('thrace_slider', null, array('configs' => array('range' => 'invalid')));
     }
     

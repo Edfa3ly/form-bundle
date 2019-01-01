@@ -56,9 +56,9 @@ class RecaptchaValidator extends ConstraintValidator
         $responseField = $this->request->request->get('recaptcha_response_field');
 
         if (empty($challengeField) || empty($responseField)) {
-            $this->context->addViolationAt($propertyPath, $constraint->emptyMessage);
+            $this->context->addViolation($propertyPath, array($constraint->emptyMessage));
         } elseif (false === $this->check($challengeField, $responseField)){ 
-            $this->context->addViolationAt($propertyPath, $constraint->invalidMessage);
+            $this->context->addViolation($propertyPath, array($constraint->invalidMessage));
         }
     }
 
