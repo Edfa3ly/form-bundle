@@ -31,7 +31,7 @@ class DoctrineORMTransformerTest extends BaseTestCaseORM
         $transformer = new DoctrineORMTransformer($this->em);
         $transformer->setClass(self::FIXTURE_PRODUCT);
         
-        $this->setExpectedException('Symfony\Component\Form\Exception\UnexpectedTypeException');
+        $this->expectExceptionCode('Symfony\Component\Form\Exception\UnexpectedTypeException');
         $transformer->transform('invalid');        
     }
     
