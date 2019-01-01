@@ -131,21 +131,23 @@ class DateTimePickerType extends AbstractType
             return $configs;
         });
 
-        $resolver->setAllowedValues(
+        $resolver->setAllowedValues('input',
             array(
-                'input'           => array(
-                    'datetime',
-                    'string',
-                    'timestamp',
-                    'array',
-                ),
-                'datetime_format' => array(
-                    'Y-m-d H:i:s',
-                    'Y-m-d h:i:s a',
-                    'Y-m-d H:i',
-                    'Y-m-d h:i a',
-                ),
-            ));
+                'datetime',
+                'string',
+                'timestamp',
+                'array',
+            )
+        );
+
+        $resolver->setAllowedValues('datetime_format',
+            array(
+                'Y-m-d H:i:s',
+                'Y-m-d h:i:s a',
+                'Y-m-d H:i',
+                'Y-m-d h:i a',
+            )
+        );
     }
 
     /**

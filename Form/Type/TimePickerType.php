@@ -134,21 +134,24 @@ class TimePickerType extends AbstractType
                 return $configs;
             }
         );
-    
-        $resolver->setAllowedValues(array(
-            'input' => array(
+
+        $resolver->setAllowedValues('input',
+            array(
                 'datetime',
                 'string',
                 'timestamp',
                 'array',
-            ),
-            'time_format' => array(
+            )
+        );
+
+        $resolver->setAllowedValues('time_format',
+            array(
                 'H:i:s',
                 'h:i:s a',
                 'H:i',
                 'h:i a'
-            ),
-        ));
+            )
+        );
     }
 
     /**

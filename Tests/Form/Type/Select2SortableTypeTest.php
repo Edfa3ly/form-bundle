@@ -8,7 +8,12 @@ use Thrace\FormBundle\Form\Type\Select2Type;
 use Symfony\Component\Form\Tests\Extension\Core\Type\TextTypeTest;
 
 use Thrace\FormBundle\Tests\Form\Extension\TypeExtensionTest;
+use Thrace\FormBundle\Form\DataTransformer\ArrayCollectionToStringTransformer;
 
+/**
+ * Class Select2SortableTypeTest
+ * @package Thrace\FormBundle\Tests\Form\Type
+ */
 class Select2SortableTypeTest extends TextTypeTest
 {
 
@@ -26,7 +31,10 @@ class Select2SortableTypeTest extends TextTypeTest
         ), $configs);
     }
 
-    
+
+    /**
+     * @return array
+     */
     protected function getExtensions()
     {
     	return array(
@@ -37,14 +45,12 @@ class Select2SortableTypeTest extends TextTypeTest
 			)
     	);
     }
-    
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     private function getMockBuilderTransformer()
     {
-        $mock = $this
-            ->createMock('Thrace\FormBundle\Form\DataTransformer\ArrayCollectionToStringTransformer')
-
-        ;
-
-        return $mock;
+        return $this->getMockBuilder(ArrayCollectionToStringTransformer::class)->disableOriginalConstructor()->getMock();
     }
 }

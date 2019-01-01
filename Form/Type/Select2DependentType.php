@@ -100,17 +100,10 @@ class Select2DependentType extends AbstractType
 
         $resolver->setRequired(array('dependent_source'));
 
-        $resolver->setAllowedValues(
-            array(
-                'widget' => array('choice'),
-            ));
-
-        $resolver->setAllowedTypes(
-            array(
-                'multiple'         => array('bool'),
-                'choices'          => array('array'),
-                'dependent_source' => array('string'),
-            ));
+        $resolver->setAllowedValues('widget', array('choice'));
+        $resolver->setAllowedValues('multiple', array(true, false));
+        $resolver->setAllowedValues('choices', array(array('value1' => 'label1', 'value2' => 'label2')));
+        $resolver->setAllowedValues('dependent_source', array('ajax_route'));
     }
 
     /**

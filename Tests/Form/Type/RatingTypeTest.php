@@ -22,7 +22,7 @@ class RatingTypeTest extends TextTypeTest
     
     public function testInvalidConfigs()
     {
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $form = $this->factory->create(RatingType::class);
     }
 

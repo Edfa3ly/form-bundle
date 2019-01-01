@@ -5,7 +5,13 @@ use Symfony\Component\Form\Tests\Extension\Core\Type\CollectionTypeTest;
 use Thrace\FormBundle\Form\Type\MultiSelectCollectionType;
 use Thrace\FormBundle\Form\Type\MultiSelectType;
 use Thrace\FormBundle\Tests\Form\Extension\TypeExtensionTest;
+use Thrace\DataGridBundle\DataGrid\DataGridInterface;
+use Thrace\FormBundle\Form\DataTransformer\DoctrineORMTransformer;
 
+/**
+ * Class MultiSelectCollectionTypeTest
+ * @package Thrace\FormBundle\Tests\Form\Type
+ */
 class MultiSelectCollectionTypeTest extends CollectionTypeTest
 {
 
@@ -32,7 +38,7 @@ class MultiSelectCollectionTypeTest extends CollectionTypeTest
     
     public function testWithInvalidDataGrid()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $form = $this->factory->create(MultiSelectCollectionType::class, null, array(
             'grid' => new \stdClass(),      
         ));
@@ -42,7 +48,7 @@ class MultiSelectCollectionTypeTest extends CollectionTypeTest
     
     public function testWithInvalidMethodIsMultiSelectEnabled()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $form = $this->factory->create(MultiSelectCollectionType::class, null, array(
             'grid' => $this->createMockDataGrid(false),      
         ));
@@ -61,33 +67,31 @@ class MultiSelectCollectionTypeTest extends CollectionTypeTest
 			)
     	);
     }
-    
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createMockTransformer()
     {
-        $mock = $this
-            ->createMock('Thrace\FormBundle\Form\DataTransformer\DoctrineORMTransformer')
-
-        ;
-        
+        $mock =  $this->getMockBuilder(DoctrineORMTransformer::class)->disableOriginalConstructor()->getMock();
         $mock
             ->expects($this->any())
             ->method('setClass')
-            ->with('Thrace\FormBundle\Tests\Fixture\Entity\Product')
-        ;
-    
+            ->with('Thrace\FormBundle\Tests\Fixture\Entity\Product');
         return $mock;
     }
-    
+
+    /**
+     * @param bool $multiSelectSortableEnabled
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createMockDataGrid($multiSelectSortableEnabled = true)
     {
-        $mock = $this->createMock('Thrace\DataGridBundle\DataGrid\DataGridInterface');;
-    
+        $mock =  $this->getMockBuilder(DataGridInterface::class)->disableOriginalConstructor()->getMock();
         $mock
             ->expects($this->any())
             ->method('isMultiSelectEnabled')
-            ->will($this->returnValue($multiSelectSortableEnabled))
-        ;
-
+            ->will($this->returnValue($multiSelectSortableEnabled));
         return $mock;
     }
 }

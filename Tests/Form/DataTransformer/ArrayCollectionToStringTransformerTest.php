@@ -75,7 +75,7 @@ class ArrayCollectionToStringTransformerTest extends BaseTestCaseORM
         $collection = new ArrayCollection();
         $collection->add(new Product());
         
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $result = $transformer->transform($collection);    
     }
     

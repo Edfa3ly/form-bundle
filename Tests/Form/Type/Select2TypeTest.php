@@ -2,10 +2,9 @@
 namespace Thrace\FormBundle\Tests\Form\Type;
 
 use Thrace\FormBundle\Form\Type\Select2Type;
-
-use Symfony\Component\Form\Tests\Extension\Core\Type\TextTypeTest;
-
+use Symfony\Component\Form\DataTransformerInterface;
 use Thrace\FormBundle\Tests\Form\Extension\TypeExtensionTest;
+use Symfony\Component\Form\Tests\Extension\Core\Type\TextTypeTest;
 
 class Select2TypeTest extends TextTypeTest
 {
@@ -75,6 +74,6 @@ class Select2TypeTest extends TextTypeTest
     
     private function getMockTransformer()
     {
-        return $this->createMock('Symfony\Component\Form\DataTransformerInterface');
+        return $this->getMockBuilder(DataTransformerInterface::class)->disableOriginalConstructor()->getMock();
     }
 }

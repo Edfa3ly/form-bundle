@@ -105,15 +105,14 @@ class DatePickerType extends AbstractType
             return $configs;
         });
 
-        $resolver->setAllowedValues(
+        $resolver->setAllowedValues('input',
             array(
-                'input' => array(
-                    'datetime',
-                    'string',
-                    'timestamp',
-                    'array',
-                ),
-            ));
+                'datetime',
+                'string',
+                'timestamp',
+                'array',
+            )
+        );
     }
 
     /**
